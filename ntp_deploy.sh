@@ -16,5 +16,5 @@ service ntp restart
 #rm mycron
 #crontab -l 2>/dev/nell | { cat; echo "*/5 * * * * ~/ntp_verify.sh"; } | crontab - 
 
-cronTask="*/5 * * * * ~/ntp_verify.sh"
+cronTask="*/5 * * * * `pwd`/ntp_verify.sh"
 (crontab -l 2>/dev/nell | grep -v -F "$cronTask" ; echo "$cronTask") | crontab -
