@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if !(service ntp status grep "active" >> /dev/null)
+if !(service ntp status grep "active" &> /dev/null)
 then 
 echo "NOTICE: ntp is not running"
 service ntp start
