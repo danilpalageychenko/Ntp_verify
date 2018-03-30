@@ -1,5 +1,5 @@
 #!/bin/bash
-apt-get install -y ntp > /dev/null
+apt-get install -y ntp &> /dev/null
 
 sed -i "/^[[:blank:]]*pool/d" /etc/ntp.conf 
 sed -i "/^[[:blank:]]*server/d" /etc/ntp.conf 
@@ -7,7 +7,7 @@ sed -i "/^[[:blank:]]*server/d" /etc/ntp.conf
 count=`cat /etc/ntp.conf |grep -n "# pool:" | awk -F: '{print $1}'`
 let count=count+1
 sed -i "$count"i\ 'server 0.ua.pool.ntp.org iburst prefer\nserver 1.ua.pool.ntp.org iburst\nserver 2.ua.pool.ntp.org iburst\nserver 3.ua.pool.ntp.org iburst' /etc/ntp.conf 
-
+cp /etc/ntp.conf /etc/ntp.conf.bak 
 service ntp restart 
 
 #crontab -l > mycron
